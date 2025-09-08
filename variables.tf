@@ -157,6 +157,10 @@ variable "max_webservers" {
   description = "(Optional) The maximum number of webserver instances that you want to run in your environment."
   type        = number
   default     = 2
+  validation {
+    condition     = var.max_webservers >= 2 && var.max_webservers <= 5
+    error_message = "Error: max_webservers must be between 2 and 5."
+  }
 }
 
 variable "weekly_maintenance_window_start" {
