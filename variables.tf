@@ -78,6 +78,17 @@ variable "min_workers" {
   default     = 1
 }
 
+variable "worker_replacement_strategy" {
+  description = "(Optional) The worker replacement strategy to use for your environment. Possible options: FORCED (default) and GRACEFUL"
+  type        = string
+  default     = "FORCED"
+
+  validation {
+    condition     = contains(["FORCED", "GRACEFUL"], var.worker_replacement_strategy)
+    error_message = "Invalid input, options: \"FORCED\", \"GRACEFUL\"."
+  }
+}
+
 variable "plugins_s3_object_version" {
   description = "(Optional) The plugins.zip file version you want to use."
   type        = string
